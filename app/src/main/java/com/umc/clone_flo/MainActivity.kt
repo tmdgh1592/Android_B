@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
     }
 
-    private fun initBottomNavigation(){
+    /*private fun initBottomNavigation(){
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, HomeFragment())
@@ -53,5 +53,5 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
-    }
+    }*/
 }
