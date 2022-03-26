@@ -1,7 +1,10 @@
 package com.umc.clone_flo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.umc.clone_flo.*
 import com.umc.clone_flo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,8 +16,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val song = Song(binding.songTitleTv.text.toString(), binding.songSingerTv.text.toString(), null)
+
+        binding.mainPlayerCl.setOnClickListener {
+            val intent = Intent(this, SongActivity::class.java)
+            // intent라는 택배 상자에 데이터라는 물건을 담아서
+            intent.putExtra("title", song.title) // "title"이라는 키로 타이틀 담아주기
+            intent.putExtra("singer", song.singer) // "singer"라는 키로 가수 이름 담아주기
+            startActivity(intent)
+        }
+
         initBottomNavigation()
 
+        Log.d("Song", song.title + song.singer) // logcat에 이 태그를 출력하는데 나중에 이걸로 검색할 수 있다.
     }
 
     private fun initBottomNavigation(){
