@@ -13,10 +13,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       // initBottomNavigation()
+        initBottomNavigation()
+
     }
 
-    /*private fun initBottomNavigation(){
+    private fun initBottomNavigation(){
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, HomeFragment())
@@ -53,5 +54,5 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
-    }*/
+    }
 }
