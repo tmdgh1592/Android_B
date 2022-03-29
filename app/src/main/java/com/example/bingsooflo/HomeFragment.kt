@@ -1,11 +1,12 @@
-package com.example.flo
+package com.example.bingsooflo
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.databinding.FragmentHomeBinding
+import androidx.viewpager2.widget.ViewPager2
+import com.example.bingsooflo.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
@@ -17,6 +18,17 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        binding.homeTodayMusicImg01Iv.setOnClickListener {
+            // Fragment 전환
+            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm, AlbumFragment()).commitAllowingStateLoss()
+        }
+
+        val bannerAdapter = BannerVpAdapter(this)
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+        binding.homeBannerVp.adapter = bannerAdapter
+        binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 좌우 스크롤
 
         return binding.root
     }

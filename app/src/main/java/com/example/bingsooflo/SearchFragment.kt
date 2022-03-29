@@ -1,11 +1,11 @@
-package com.example.flo
+package com.example.bingsooflo
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.databinding.FragmentSearchBinding
+import com.example.bingsooflo.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
 
