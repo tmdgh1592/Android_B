@@ -9,7 +9,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:background="@color/white"
         android:scaleType="fitXY"
         android:src="@drawable/btn_player_setting"

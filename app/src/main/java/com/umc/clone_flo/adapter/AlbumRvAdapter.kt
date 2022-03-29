@@ -1,7 +1,9 @@
 package com.umc.clone_flo.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -9,7 +11,9 @@ import com.umc.clone_flo.Song
 import com.umc.clone_flo.databinding.ItemAlbumBinding
 import com.umc.clone_flo.util.RecyclerViewDiffUtil
 
-class AlbumRvAdapter(var musicList: ArrayList<Song>) : RecyclerView.Adapter<AlbumRvAdapter.AlbumViewHolder>() {
+class AlbumRvAdapter(var albumList: ArrayList<Song>) : RecyclerView.Adapter<AlbumRvAdapter.AlbumViewHolder>() {
+
+    private val mDiffer = AsyncListDiffer(this, RecyclerViewDiffUtil<Song>())
 
     inner class AlbumViewHolder(private val binding: ItemAlbumBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Song) {
@@ -28,18 +32,13 @@ class AlbumRvAdapter(var musicList: ArrayList<Song>) : RecyclerView.Adapter<Albu
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.bind(musicList[position])
+        holder.bind(albumList[position])
     }
 
-    override fun getItemCount(): Int = musicList.size
+    override fun getItemCount(): Int = mDiffer.currentList.size
 
     fun updateList(newList: ArrayList<Song>) {
-        val diffUtil = RecyclerViewDiffUtil(musicList, newList)
-        val diffResult = DiffUtil.calculateDiff(diffUtil)
-
-        musicList.clear()
-        musicList.addAll(newList)
-        diffResult.dispatchUpdatesTo(this)
+        mDiffer.submitList(newList)
     }
 
 

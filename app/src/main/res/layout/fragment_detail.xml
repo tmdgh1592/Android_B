@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp">
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/title_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="album_title_tv, artist_title_tv, balgye_title_tv, company_title_tv" />
+
+        <TextView
+            android:id="@+id/album_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="앨범명"
+            android:textColor="@color/titleTextColor"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/album_detail_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="BE RIGHT BACK"
+            android:textColor="@color/detailTextColor"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toRightOf="@+id/title_barrier"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/artist_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="아티스트"
+            android:textColor="@color/titleTextColor"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/album_title_tv" />
+
+        <TextView
+            android:id="@+id/artist_detail_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Rohhan (이로한)"
+            android:textColor="@color/detailTextColor"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/artist_title_tv"
+            app:layout_constraintLeft_toRightOf="@+id/title_barrier"
+            app:layout_constraintTop_toTopOf="@+id/artist_title_tv" />
+
+
+        <TextView
+            android:id="@+id/balgye_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="발계사"
+            android:textColor="@color/titleTextColor"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artist_title_tv" />
+
+        <TextView
+            android:id="@+id/balgye_detail_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="(주)인터파크"
+            android:textColor="@color/detailTextColor"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/balgye_title_tv"
+            app:layout_constraintLeft_toRightOf="@+id/title_barrier"
+            app:layout_constraintTop_toTopOf="@+id/balgye_title_tv" />
+
+
+        <TextView
+            android:id="@+id/company_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="기획사"
+            android:textColor="@color/titleTextColor"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/balgye_title_tv" />
+
+        <TextView
+            android:id="@+id/company_detail_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="VMC"
+            android:textColor="@color/detailTextColor"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/company_title_tv"
+            app:layout_constraintLeft_toRightOf="@+id/title_barrier"
+            app:layout_constraintTop_toTopOf="@+id/company_title_tv" />
+
+
+        <TextView
+            android:id="@+id/album_info_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="앨범 정보"
+            android:textColor="@color/titleTextColor"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/company_title_tv" />
+
+
+        <TextView
+            android:id="@+id/album_info_detail_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="12dp"
+            android:gravity="left"
+            android:text="Rohann(이로한), 새 EP 앨범 [BE RIGHT BACK]\n\n
+VMC의 Rohann(이로한)이 군입대 전 20대 초반의 커리어를 정리하는 EP 앨범 [BE RIGHT BACK]을 발표한다.
+완성도 높은 랩 퍼포먼스의 붐뱁 넘버들과 그간의 소회를 담은 타이틀곡 ‘Good Night’을 포함, 총 다섯 곡으로 구성되어 있다. 참여진으로는 Chillin Homie(칠린호미), 딥플로우, dsel(디젤), 그리고 VMC 프로듀서 Fredi Casso, Van Ruther, BUGGY가 함께 했다.
+1년 9개월 후 멋진 컴백을 기약하며, I’ll be right back!\n\n
+
+01. Comin’ At Ya (feat. Chillin Homie)\n
+prod. Fredi Casso / lyrics. Rohann, Chillin Homie
+bass. 남우석 of From All To Human\n\n
+
+02. Vague Flow\n
+prod. Van Ruther / lyrics. Rohann\n\n
+
+03. Dial (feat. Deepflow, dsel)\n
+prod. Fredi Casso / lyrics. Rohann, Deepflow, dsel\n\n
+
+04. Dumb Dumb\n
+prod. BUGGY / lyrics Rohann\n\n
+
+05. Good Night\n
+prod. BUGGY / lyrics Rohann\n
+guitar. JKUN / chorus. TK\n\n
+
+all tracks mix &amp; mastered. Brasco @ VMC STUDIO\n
+
+artwork. rowdee\n
+photography. Jaeku\n
+
+‘Comin’ At Ya’, ‘Good Night’ M/V directed by Laufl
+"
+            android:textColor="@color/detailTextColor"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/album_info_title_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -8,14 +8,24 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#9cbee2</color>
+    <color name="colorPrimary">@color/purple_700</color>
+    <color name="colorSecondaryVarient">@color/purple_700</color>
     <color name="colorPrimaryDark">#062342</color>
     <color name="colorAccent">#6bb2ff</color>
 
-    <color name="transparent">#00ff0000</color>
+    <color name="transparent">#00000000</color>
     <color name="select_color">#3f3fff</color>
     <color name="gray_color">#a8a8a8</color>
 
     <color name="songPlayerSeekbarBg">#3f3fff</color>
     <color name="songPlayerProgressTint">#3f3fff</color>
+    <color name="titleSongColor">#3C45EC</color>
+
+    <color name="unSelectedIndicatorColor">#D7D7DB</color>
+    <color name="selectedIndicatorColor">@color/colorPrimary</color>
+
+    <color name="unSelectedColor">#464646</color>
+    <color name="titleTextColor">#171717</color>
+    <color name="detailTextColor">#6F6F6F</color>
+    <color name="tabLayoutDividerColor">#FAFAFA</color>
 </resources>
