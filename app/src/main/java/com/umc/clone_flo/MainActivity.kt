@@ -1,11 +1,15 @@
 package com.umc.clone_flo
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.WindowManager
 import com.umc.clone_flo.*
 import com.umc.clone_flo.databinding.ActivityMainBinding
+import com.umc.clone_flo.util.setStatusBarTransparent
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,9 +18,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setStatusBarTransparent(this, binding.rootView)
+
         setContentView(binding.root)
 
-        val song = Song(binding.songTitleTv.text.toString(), binding.songSingerTv.text.toString(), null)
+        val song = Song(0,binding.songTitleTv.text.toString(), binding.songSingerTv.text.toString(), null)
 
         binding.mainPlayerCl.setOnClickListener {
             val intent = Intent(this, SongActivity::class.java)

@@ -1,6 +1,7 @@
 package com.umc.clone_flo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.MutableLiveData
+import com.google.android.material.tabs.TabLayoutMediator
+import com.umc.clone_flo.adapter.AlbumVpAdapter
 import com.umc.clone_flo.databinding.FragmentAlbumBinding
 
 // Fragment의 기능을 사용할 수 있는 클래스인 Fragment를 상속
 class AlbumFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentAlbumBinding// 바인딩 선언
-    private val isLike = MutableLiveData<Boolean>()
-
+    private val isLike = MutableLiveData<Boolean>(false)
+    private val information = arrayListOf<String>("수록곡", "상세정보", "영상")
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,6 +58,13 @@ class AlbumFragment : Fragment(), View.OnClickListener {
                     albumLikeIv.setImageResource(R.drawable.ic_my_like_off)
                 }
             }
+
+            val albumAdapter = AlbumVpAdapter(this@AlbumFragment)
+            albumContentVp.adapter = albumAdapter
+            TabLayoutMediator(albumContentTb, albumContentVp) { tab, position ->
+                tab.text = information[position]
+            }.attach()
+
         }
     }
 

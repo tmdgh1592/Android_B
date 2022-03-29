@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.umc.clone_flo.adapter.AlbumRvAdapter
+import com.umc.clone_flo.adapter.BannerVpAdapter
+import com.umc.clone_flo.adapter.PanelVpAdapter
 import com.umc.clone_flo.databinding.FragmentHomeBinding
 import com.umc.clone_flo.util.AlbumAdapterDecoration
+
 
 class HomeFragment : Fragment() {
 
@@ -24,12 +25,12 @@ class HomeFragment : Fragment() {
         AlbumRvAdapter(todayAlbums)
     }
 
-
     // 매일 들어도 좋은 팟캐스트 리사이클러뷰 어댑터
     private var dailyAlbums = ArrayList<Song>()
     private val potcastAdapter: AlbumRvAdapter by lazy {
         AlbumRvAdapter(dailyAlbums)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +38,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        putDumpData()
 
         with(binding) {
 
@@ -48,33 +55,61 @@ class HomeFragment : Fragment() {
                     .commitAllowingStateLoss()
             }
 
+            val bannerAdapter = BannerVpAdapter(this@HomeFragment).apply {
+                addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+                addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+                addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+                addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+                addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+                addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+                addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+                addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+                homeBannerVp.adapter = this
+                homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            }
+
+
+            val panelAdapter = PanelVpAdapter(this@HomeFragment).apply {
+                addFragment(PanelFragment(R.drawable.img_first_album_default))
+                addFragment(PanelFragment(R.drawable.img_first_album_default))
+                addFragment(PanelFragment(R.drawable.img_first_album_default))
+                addFragment(PanelFragment(R.drawable.img_first_album_default))
+                addFragment(PanelFragment(R.drawable.img_first_album_default))
+                addFragment(PanelFragment(R.drawable.img_first_album_default))
+                addFragment(PanelFragment(R.drawable.img_first_album_default))
+                addFragment(PanelFragment(R.drawable.img_first_album_default))
+                homePanelViewpager.adapter = this
+                homePanelViewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            }
+            indicator.setViewPager(homePanelViewpager)
+            panelAdapter.registerAdapterDataObserver(indicator.adapterDataObserver)
+
 
 
             homeTodayMusicAlbumRv.adapter = todayAlbumAdapter
             homeTodayMusicAlbumRv.addItemDecoration(AlbumAdapterDecoration())
-            todayAlbums = ArrayList<Song>().apply {
-                add(Song("LILAC", "아이유 (IU)", R.drawable.img_album_exp2))
-                add(Song("제목", "가수명", R.drawable.img_album_exp))
-                add(Song("제목", "가수명", R.drawable.img_album_exp))
-                add(Song("제목", "가수명", R.drawable.img_album_exp))
-            }
             todayAlbumAdapter.updateList(todayAlbums)
-
 
             homeDailyMusicRv.adapter = potcastAdapter
             homeDailyMusicRv.addItemDecoration(AlbumAdapterDecoration())
-            dailyAlbums = ArrayList<Song>().apply {
-                add(Song("제목", "가수명", R.drawable.img_potcast_exp))
-                add(Song("제목", "가수명", R.drawable.img_potcast_exp))
-                add(Song("제목", "가수명", R.drawable.img_potcast_exp))
-                add(Song("제목", "가수명", R.drawable.img_potcast_exp))
-            }
             potcastAdapter.updateList(dailyAlbums)
 
+        }
+    }
 
-
+    private fun putDumpData() {
+        todayAlbums = ArrayList<Song>().apply {
+            add(Song(0, "LILAC", "아이유 (IU)", R.drawable.img_album_exp2))
+            add(Song(0, "제목", "가수명", R.drawable.img_album_exp))
+            add(Song(0, "제목", "가수명", R.drawable.img_album_exp))
+            add(Song(0, "제목", "가수명", R.drawable.img_album_exp))
         }
 
-        return binding.root
+        dailyAlbums = ArrayList<Song>().apply {
+            add(Song(0, "제목", "가수명", R.drawable.img_potcast_exp))
+            add(Song(0, "제목", "가수명", R.drawable.img_potcast_exp))
+            add(Song(0, "제목", "가수명", R.drawable.img_potcast_exp))
+            add(Song(0, "제목", "가수명", R.drawable.img_potcast_exp))
+        }
     }
 }
