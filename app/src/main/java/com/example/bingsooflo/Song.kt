@@ -1,7 +1,7 @@
 package com.example.bingsooflo
 
 data class Song(
-    val title : String = "",
-    val singer : String = "",
-
+    var no: Int = 0,
+    var title : String = "",
+    var singer : String = "",
 )

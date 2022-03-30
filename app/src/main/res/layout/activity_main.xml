@@ -89,10 +89,7 @@
                 android:layout_marginHorizontal="15dp"
                 android:src="@drawable/btn_miniplayer_go_list" />
 
-
         </LinearLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
