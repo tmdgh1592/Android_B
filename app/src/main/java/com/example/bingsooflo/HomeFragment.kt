@@ -11,6 +11,7 @@ import com.example.bingsooflo.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
+    var panelData = arrayListOf<Panel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,11 +25,23 @@ class HomeFragment : Fragment() {
             (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm, AlbumFragment()).commitAllowingStateLoss()
         }
 
-        val bannerAdapter = BannerVpAdapter(this)
+        // Banner ViewPager 2
+        val bannerAdapter = BannerVPAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
         binding.homeBannerVp.adapter = bannerAdapter
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 좌우 스크롤
+
+        // Panel ViewPager 2
+        val panelAdapter = PanelVPAdapter(this)
+        panelData.add(Panel(R.drawable.img_first_album_default, "매혹적인 음색의 여성 보컬\n팝", "Butter", "BTS", R.drawable.img_album_exp))
+        panelData.add(Panel(R.drawable.img_first_album_default, "달밤의 감성 산책", "라일락", "아이유(IU)", R.drawable.img_album_exp2))
+
+        for (position in 0 until panelData.size) {
+            panelAdapter.addFragment(PanelFragment(panelData[position]))
+        }
+        binding.homePanelVp.adapter = panelAdapter
+        binding.homePanelVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         return binding.root
     }
