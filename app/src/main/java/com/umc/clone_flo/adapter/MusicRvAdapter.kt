@@ -14,6 +14,10 @@ class MusicRvAdapter(var musicList: ArrayList<Song>) :
 
     private val mDiffer = AsyncListDiffer(this, RecyclerViewDiffUtil<Song>())
 
+    init {
+        mDiffer.submitList(musicList)
+    }
+
     inner class MusicViewHolder(val binding: ItemMusicBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Song) {
