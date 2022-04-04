@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.umc.clone_flo.adapter.LockerVpAdapter
 import com.umc.clone_flo.databinding.FragmentLockerBinding
 import com.umc.clone_flo.util.MusicFileFragment
+import kotlinx.coroutines.CoroutineScope
 
 class LockerFragment : Fragment() {
 

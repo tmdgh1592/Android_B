@@ -10,13 +10,15 @@
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/drawable/bg_title_song.xml" value="0.3453703703703704" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/drawable/ic_selected_indicator_circle.xml" value="0.3453703703703704" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/drawable/ic_unselected_indicator_circle.xml" value="0.3453703703703704" />
+        <entry key="..\:/android_practice/clone_flo/app/src/main/res/drawable/splash.xml" value="0.3351851851851852" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/drawable/tab_indicator_color.xml" value="0.3453703703703704" />
-        <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/activity_song.xml" value="0.2604166666666667" />
+        <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/activity_splash.xml" value="0.3651041666666667" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_album.xml" value="0.25" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_banner.xml" value="0.3651041666666667" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_detail.xml" value="0.33" />
-        <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_home.xml" value="0.3980222496909765" />
+        <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_locker.xml" value="0.33" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_music_file.xml" value="0.3651041666666667" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_pannel.xml" value="0.3651041666666667" />
