@@ -28,4 +28,8 @@
         <item name="android:textSize">17sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="SplashTheme" parent="Theme.Clone_flo">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
 </resources>

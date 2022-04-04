@@ -13,9 +13,13 @@ import com.umc.clone_flo.adapter.BannerVpAdapter
 import com.umc.clone_flo.adapter.PanelVpAdapter
 import com.umc.clone_flo.databinding.FragmentHomeBinding
 import com.umc.clone_flo.util.AlbumAdapterDecoration
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), CoroutineScope {
+
+    val job = Job()
 
     lateinit var binding: FragmentHomeBinding
 
@@ -84,6 +88,14 @@ class HomeFragment : Fragment() {
             indicator.setViewPager(homePanelViewpager)
             panelAdapter.registerAdapterDataObserver(indicator.adapterDataObserver)
 
+            launch {
+                while(true){
+                    delay(2000) // 2초 대기
+                    with(homePanelViewpager) {
+                        currentItem = (currentItem + 1) % panelAdapter.itemCount
+                    }
+                }
+            }
 
 
             homeTodayMusicAlbumRv.adapter = todayAlbumAdapter
@@ -112,4 +124,8 @@ class HomeFragment : Fragment() {
             add(Song(0, "제목", "가수명", R.drawable.img_potcast_exp))
         }
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
+
 }
