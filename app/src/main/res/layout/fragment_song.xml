@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SongFragment">
+
+    <LinearLayout
+        android:id="@+id/song_mix_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/song_mix_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 취향 MIX"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/song_mix_switch_off_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/btn_toggle_off" />
+
+        <ImageView
+            android:id="@+id/song_mix_switch_on_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/btn_toggle_on"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/song_total_select_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/song_mix_ll"
+        android:layout_marginStart="15dp">
+        <ImageView
+            android:id="@+id/song_total_select_off_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/btn_playlist_select_off" />
+        <ImageView
+            android:id="@+id/song_total_select_on_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/btn_playlist_select_on"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/song_total_select_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체선택"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/song_total_play_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/song_mix_ll"
+        android:layout_marginEnd="15dp">
+        <ImageView
+            android:id="@+id/song_total_play_off_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_browse_arrow_right" />
+        <TextView
+            android:id="@+id/song_total_play_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체듣기"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/song_playlist_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/song_total_select_ll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
