@@ -47,7 +47,7 @@ class SongFragment : Fragment() {
         for (no in 1..6) {
             val title = "제목 $no"
             val singer = "가수 $no"
-            var song = Song(no, title, singer)
+            var song = Song(title, singer)
             data.add(song)
         }
         return data

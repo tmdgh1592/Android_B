@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bingsooflo.databinding.FragmentHomeBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : Fragment() {
 
@@ -42,6 +43,12 @@ class HomeFragment : Fragment() {
         }
         binding.homePanelVp.adapter = panelAdapter
         binding.homePanelVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        // connect TabLayout to ViewPager 2
+//        TabLayoutMediator(binding.homePanelTb, binding.homePanelVp) {
+//                tab, position ->
+//            tab.seticon = information[position]
+//        }.attach()
 
         return binding.root
     }

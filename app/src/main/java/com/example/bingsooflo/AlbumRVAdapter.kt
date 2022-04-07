@@ -34,7 +34,7 @@ class Holder(val binding: ItemSongBinding) : RecyclerView.ViewHolder(binding.roo
         }
     }
     fun setSong(song: Song) {
-        binding.albumSongNoTv.text = "${song.no}"
+        binding.albumSongNoTv.text = "01"
         binding.albumSongTitleTv.text = song.title
         binding.albumSongSingerTv.text = song.singer
     }
