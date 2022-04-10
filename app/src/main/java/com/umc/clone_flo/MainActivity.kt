@@ -7,7 +7,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.umc.clone_flo.*
+import com.umc.clone_flo.SongActivity.Companion.mediaPlayer
 import com.umc.clone_flo.databinding.ActivityMainBinding
 import com.umc.clone_flo.util.setStatusBarTransparent
 import kotlinx.coroutines.*
@@ -19,6 +21,9 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
     private lateinit var activityLauncher: ActivityResultLauncher<Intent>
     lateinit var binding: ActivityMainBinding
     private var song: Song? = null
+    private val gson = Gson()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_Clone_flo)
@@ -86,7 +91,8 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
             60,
             0,
             0f,
-            false
+            false,
+            "music_lilac"
         )
     }
 
@@ -132,7 +138,9 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
         when (v?.id) {
             R.id.main_player_cl -> {
                 val intent = Intent(this@MainActivity, SongActivity::class.java)
+                song?.pausePosition = mediaPlayer?.currentPosition ?: 0
                 intent.putExtra("song", song)
+
                 activityLauncher.launch(intent)
                 song?.isPlaying = false // 노래 진행을 멈추고 SongActivity에서 처리
             }
@@ -146,11 +154,50 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
 
     private fun setPlayerStatus(isPlaying: Boolean) {
         song?.isPlaying = isPlaying
+
         val imgResId = if (isPlaying) {
+            if (mediaPlayer?.isPlaying == false) {
+                mediaPlayer?.seekTo(song?.pausePosition ?: 0)
+                mediaPlayer?.start()
+            }
             R.drawable.btn_miniplay_pause
         } else {
+            if (mediaPlayer?.isPlaying == true) mediaPlayer?.pause()
             R.drawable.btn_miniplayer_play
         }
         Glide.with(this).load(imgResId).into(binding.mainMiniplayerBtn)
+    }
+
+    // 화면이 보여지기 직전에 호출됨
+    // onResume은 화면이 보여진 이후에 호출됨.
+    override fun onStart() {
+        super.onStart()
+        val pref = getSharedPreferences("song", MODE_PRIVATE)
+        val songJson = pref.getString("songData", null)
+
+        song = if (songJson == null) {
+            Song(
+                0,
+                "라일락",
+                "아이유(IU)",
+                null,
+                false,
+                60,
+                0,
+                0f,
+                false,
+                "music_lilac"
+            )
+        } else {
+            gson.fromJson(songJson, Song::class.java) // json 직렬화
+        }
+
+        mediaPlayer?.seekTo(song?.pausePosition ?: 0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 }

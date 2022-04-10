@@ -97,7 +97,6 @@ class HomeFragment : Fragment(), CoroutineScope {
                 }
             }
 
-
             homeTodayMusicAlbumRv.adapter = todayAlbumAdapter
             homeTodayMusicAlbumRv.addItemDecoration(AlbumAdapterDecoration())
             todayAlbumAdapter.updateList(todayAlbums)
