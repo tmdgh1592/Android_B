@@ -55,7 +55,6 @@
         android:id="@+id/song_music_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="제목"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -196,6 +195,7 @@
         android:gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@+id/song_related_iv"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/song_start_time_tv">
 

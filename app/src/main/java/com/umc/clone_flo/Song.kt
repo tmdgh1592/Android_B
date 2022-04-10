@@ -12,4 +12,6 @@ data class Song(
     var second: Int = 0,
     var mills: Float = 0F,
     var isPlaying: Boolean = false,
+    var music: String = "",
+    var pausePosition: Int = 0
 ): Serializable
