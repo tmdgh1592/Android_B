@@ -36,7 +36,7 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
         initSong() // 음악 데이터 초기화
         initBottomNavigation() // 바텀 네비게이션 초기화
         setClickListener() // 클릭 리스너
-        startMusic(song!!.playTime) // 음악 시작
+        startMusic() // 음악 시작
 
 //            Log.d("Song", song?.title + song?.singer) // logcat에 이 태그를 출력하는데 나중에 이걸로 검색할 수 있다.
 
@@ -55,16 +55,16 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
     }
 
     // 실행 버튼 클릭시 Song Model의 isPlaying Flag가 True가 되면서 UI 갱신
-    private fun startMusic(playTime: Int) {
+    private fun startMusic() {
         CoroutineScope(Dispatchers.Default).launch {
-            while (song!!.second < playTime) {
+            while (song!!.second < song!!.playTime) {
                 // 노래가 실행중이면
                 if (song!!.isPlaying) {
                     delay(50)
                     song!!.mills += 50F
 
                     CoroutineScope(Dispatchers.Main).launch {
-                        binding.songProgressSb.progress = ((song!!.mills / playTime) * 100).toInt()
+                        binding.songProgressSb.progress = ((song!!.mills / song!!.playTime) * 100).toInt()
                     }
 
                     if (song!!.mills % 1000 == 0F) {
