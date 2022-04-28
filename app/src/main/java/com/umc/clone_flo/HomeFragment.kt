@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
+import com.google.gson.Gson
 import com.umc.clone_flo.adapter.AlbumRvAdapter
 import com.umc.clone_flo.adapter.BannerVpAdapter
 import com.umc.clone_flo.adapter.PanelVpAdapter
@@ -89,7 +90,7 @@ class HomeFragment : Fragment(), CoroutineScope {
             panelAdapter.registerAdapterDataObserver(indicator.adapterDataObserver)
 
             launch {
-                while(true){
+                while (true) {
                     delay(2000) // 2초 대기
                     with(homePanelViewpager) {
                         currentItem = (currentItem + 1) % panelAdapter.itemCount
@@ -97,9 +98,24 @@ class HomeFragment : Fragment(), CoroutineScope {
                 }
             }
 
+            todayAlbumAdapter.setMyItemClickListener(object : AlbumRvAdapter.MyItemClickListener {
+                override fun onItemClick(album: Song) {
+                    changeAlbumFragment(album)
+                }
+
+                override fun onRemoveAlbum(position: Int) {
+                    todayAlbumAdapter.removeItem(position)
+                }
+
+                override fun onPlayClick(song: Song) {
+                    (requireActivity() as MainActivity).playMusic(song)
+                }
+            })
+
             homeTodayMusicAlbumRv.adapter = todayAlbumAdapter
             homeTodayMusicAlbumRv.addItemDecoration(AlbumAdapterDecoration())
             todayAlbumAdapter.updateList(todayAlbums)
+
 
             homeDailyMusicRv.adapter = potcastAdapter
             homeDailyMusicRv.addItemDecoration(AlbumAdapterDecoration())
@@ -108,12 +124,23 @@ class HomeFragment : Fragment(), CoroutineScope {
         }
     }
 
+    private fun changeAlbumFragment(album: Song) {
+        (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, AlbumFragment().apply {
+                arguments = Bundle().apply {
+                    val gson = Gson()
+                    val albumJson = gson.toJson(album)
+                    putString("album", albumJson)
+                }
+            }).commitAllowingStateLoss()
+    }
+
     private fun putDumpData() {
         todayAlbums = ArrayList<Song>().apply {
-            add(Song(0, "LILAC", "아이유 (IU)", R.drawable.img_album_exp2))
-            add(Song(0, "제목", "가수명", R.drawable.img_album_exp))
-            add(Song(0, "제목", "가수명", R.drawable.img_album_exp))
-            add(Song(0, "제목", "가수명", R.drawable.img_album_exp))
+            add(Song(0, "LILAC", "아이유 (IU)", R.drawable.img_album_exp2, false, 279, 0, 0F, true, "lilac", 0))
+            add(Song(0, "결론적으로", "SPARKY", R.drawable.album_sample_01))
+            add(Song(0, "별거 없던 그 하루로", "임창정", R.drawable.album_sample_02))
+            add(Song(0, "잘 가라니", "2am", R.drawable.album_sample_06))
         }
 
         dailyAlbums = ArrayList<Song>().apply {
