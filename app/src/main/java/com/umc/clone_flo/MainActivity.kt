@@ -1,6 +1,7 @@
 package com.umc.clone_flo
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
@@ -92,7 +93,7 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
             0,
             0f,
             false,
-            "music_lilac"
+            "lilac"
         )
     }
 
@@ -163,6 +164,7 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
             R.drawable.btn_miniplay_pause
         } else {
             if (mediaPlayer?.isPlaying == true) mediaPlayer?.pause()
+            song?.pausePosition = mediaPlayer?.currentPosition ?: 0
             R.drawable.btn_miniplayer_play
         }
         Glide.with(this).load(imgResId).into(binding.mainMiniplayerBtn)
@@ -186,13 +188,34 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
                 0,
                 0f,
                 false,
-                "music_lilac"
+                "lilac"
             )
         } else {
             gson.fromJson(songJson, Song::class.java) // json 직렬화
         }
 
         mediaPlayer?.seekTo(song?.pausePosition ?: 0)
+    }
+
+    fun playMusic(newSong: Song) {
+        with(binding) {
+            with(newSong) {
+                songTitleTv.text = title
+                songSingerTv.text = singer
+                song = this
+                createMediaPlayer(this)
+                setPlayerStatus(true)
+            }
+        }
+    }
+
+    private fun createMediaPlayer(song: Song) {
+        if (mediaPlayer == null) {
+            val music = resources.getIdentifier(song.music, "raw", packageName)
+            mediaPlayer = MediaPlayer.create(this, music)
+            mediaPlayer?.seekTo(0)
+            mediaPlayer?.start()
+        }
     }
 
     override fun onDestroy() {

@@ -10,7 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
 import com.umc.clone_flo.adapter.AlbumVpAdapter
 import com.umc.clone_flo.databinding.FragmentAlbumBinding
 
@@ -19,6 +21,7 @@ class AlbumFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentAlbumBinding// 바인딩 선언
     private val isLike = MutableLiveData<Boolean>(false)
     private val information = arrayListOf<String>("수록곡", "상세정보", "영상")
+    private val gson = Gson()
     
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,8 +33,13 @@ class AlbumFragment : Fragment(), View.OnClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_album, container, false)
         binding.lifecycleOwner = this
 
+        val albumJson = arguments?.getString("album")
+        val album = gson.fromJson(albumJson, Song::class.java)
+        setInit(album)
+
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,6 +84,17 @@ class AlbumFragment : Fragment(), View.OnClickListener {
 
     private fun toggleLike() {
         isLike.value = isLike.value?.not()
+    }
+
+    private fun setInit(album: Song?) {
+        with(binding) {
+            with(album!!) {
+                Glide.with(requireContext()).load(resId).into(albumAlbumIv)
+                albumMusicTitleTv.text = title
+                albumSingerNameTv.text = singer
+            }
+
+        }
     }
 
     override fun onClick(v: View?) {

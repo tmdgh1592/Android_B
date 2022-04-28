@@ -66,22 +66,29 @@ class SongActivity : AppCompatActivity(), View.OnClickListener {
         timer.start()
     }
 
+
+    private fun createPlayer() {
+        if (mediaPlayer == null) {
+            val music = resources.getIdentifier(song.music, "raw", packageName)
+            mediaPlayer = MediaPlayer.create(this@SongActivity, music)
+        }
+    }
+
     private fun setPlayer() {
         with(binding) {
+            createPlayer()
+
             songMusicTitleTv.text = song.title
             songSingerNameTv.text = song.singer
             songStartTimeTv.text = String.format("%02d:%02d", song.second / 60, song.second % 60)
             songEndTimeTv.text = String.format("%02d:%02d", song.playTime / 60, song.playTime % 60)
             songProgressSb.progress = ((song.mills / song.playTime) * 100).toInt()
 
-            if (mediaPlayer == null) {
-                val music = resources.getIdentifier(song.music, "raw", packageName)
-                mediaPlayer = MediaPlayer.create(this@SongActivity, music)
-            }
-
             setPlayerStatus(song.isPlaying)
         }
     }
+
+
 
     private fun randomPlay() {
         binding.songProgressSb.progress = 0 // Seekbar progress 0으로 초기화
