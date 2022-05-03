@@ -24,7 +24,7 @@ class MusicRvAdapter(var musicList: ArrayList<Song>) :
             with(binding) {
                 with(item) {
                     val musicNum =
-                        if (musicNumber.toString().length < 2) "0$musicNumber" else musicNumber.toString()
+                        if (id.toString().length < 2) "0$id" else id.toString()
                     musicNumberTv.text = musicNum
                     musicTitleTv.text = title
                     musicSingerTv.text = singer

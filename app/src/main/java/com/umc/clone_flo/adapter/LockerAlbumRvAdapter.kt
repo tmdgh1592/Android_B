@@ -2,12 +2,10 @@ package com.umc.clone_flo.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.umc.clone_flo.Song
 import com.umc.clone_flo.databinding.ItemSavedMusicBinding
-import com.umc.clone_flo.util.RecyclerViewDiffUtil
 
 class LockerAlbumRvAdapter(var albumList: ArrayList<Song>) :
     RecyclerView.Adapter<LockerAlbumRvAdapter.LockerAlbumViewHolder>() {
@@ -23,6 +21,11 @@ class LockerAlbumRvAdapter(var albumList: ArrayList<Song>) :
         notifyDataSetChanged()
     }
 
+    fun removeAllItems() {
+        albumList.clear()
+        notifyDataSetChanged()
+    }
+
     fun updateList(newList: ArrayList<Song>) {
         albumList = newList
         notifyDataSetChanged()
@@ -30,7 +33,7 @@ class LockerAlbumRvAdapter(var albumList: ArrayList<Song>) :
 
     interface MyItemClickListener {
         //fun onItemClick(song: Song)
-        fun onRemoveAlbum(position: Int)
+        fun onRemoveAlbum(position: Int, songId: Int)
     }
 
     inner class LockerAlbumViewHolder(val binding: ItemSavedMusicBinding) :
@@ -38,7 +41,7 @@ class LockerAlbumRvAdapter(var albumList: ArrayList<Song>) :
         fun bind(song: Song) {
             with(binding) {
                 with(song) {
-                    Glide.with(albumIv).load(resId).into(albumIv)
+                    Glide.with(albumIv).load(coverImg).into(albumIv)
                     titleTv.text = song.title
                     singerTv.text = song.singer
                 }
@@ -57,8 +60,9 @@ class LockerAlbumRvAdapter(var albumList: ArrayList<Song>) :
     }
 
     override fun onBindViewHolder(holder: LockerAlbumViewHolder, position: Int) {
-        holder.bind(albumList[position])
-        holder.binding.deleteBtn.setOnClickListener { mItemClickListener.onRemoveAlbum(position) }
+        val album = albumList[position]
+        holder.bind(album)
+        holder.binding.deleteBtn.setOnClickListener { mItemClickListener.onRemoveAlbum(position, album.id) }
     }
 
     override fun getItemCount(): Int = albumList.size

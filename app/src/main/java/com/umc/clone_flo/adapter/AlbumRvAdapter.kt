@@ -46,7 +46,7 @@ class AlbumRvAdapter(var albumList: ArrayList<Song>) :
                 with(item) {
                     itemAlbumTitleTv.text = item.title
                     itemAlbumSingerTv.text = item.singer
-                    Glide.with(itemAlbumCoverImgIv).load(resId).into(itemAlbumCoverImgIv)
+                    Glide.with(itemAlbumCoverImgIv).load(coverImg).into(itemAlbumCoverImgIv)
                 }
             }
         }

@@ -31,6 +31,8 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
         binding = ActivityMainBinding.inflate(layoutInflater)
         setStatusBarTransparent(this, binding.rootView)
         setContentView(binding.root)
+        inputDummySongs()
+
 
         setActivityLauncher()
         initSong() // 음악 데이터 초기화
@@ -64,7 +66,8 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
                     song!!.mills += 50F
 
                     CoroutineScope(Dispatchers.Main).launch {
-                        binding.songProgressSb.progress = ((song!!.mills / song!!.playTime) * 100).toInt()
+                        binding.songProgressSb.progress =
+                            ((song!!.mills / song!!.playTime) * 100).toInt()
                     }
 
                     if (song!!.mills % 1000 == 0F) {
@@ -138,9 +141,13 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.main_player_cl -> {
+                val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
+                editor.putInt("songId", song?.id ?: 0)
+                editor.apply()
+
                 val intent = Intent(this@MainActivity, SongActivity::class.java)
                 song?.pausePosition = mediaPlayer?.currentPosition ?: 0
-                intent.putExtra("song", song)
+                intent.putExtra("songId", song?.id)
 
                 activityLauncher.launch(intent)
                 song?.isPlaying = false // 노래 진행을 멈추고 SongActivity에서 처리
@@ -175,7 +182,15 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
     override fun onStart() {
         super.onStart()
         val pref = getSharedPreferences("song", MODE_PRIVATE)
-        val songJson = pref.getString("songData", null)
+        val songId = pref.getInt("songId", 0)
+
+        val songDB = SongDatabase.getInstance(this)!!
+        song = if (songId == 0) {
+            songDB.songDao().getSong(1)
+        } else {
+            songDB.songDao().getSong(songId)
+        }
+        /*val songJson = pref.getString("songData", null)
 
         song = if (songJson == null) {
             Song(
@@ -192,7 +207,7 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
             )
         } else {
             gson.fromJson(songJson, Song::class.java) // json 직렬화
-        }
+        }*/
 
         mediaPlayer?.seekTo(song?.pausePosition ?: 0)
     }
@@ -222,5 +237,61 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
         super.onDestroy()
         mediaPlayer?.release()
         mediaPlayer = null
+    }
+
+    private fun inputDummySongs() {
+        val songDB = SongDatabase.getInstance(this)!!
+        val songs = songDB.songDao().getSongs()
+
+        if (songs.isNotEmpty()) return
+        songDB.songDao().insert(
+            Song(
+                0,
+                "LILAC",
+                "아이유 (IU)",
+                R.drawable.img_album_exp2,
+                false,
+                279,
+                0,
+                0F,
+                true,
+                "lilac",
+                0
+            )
+        )
+        songDB.songDao().insert(
+            Song(
+                0,
+                "결론적으로",
+                "SPARKY",
+                R.drawable.album_sample_01,
+                false,
+                279,
+                0,
+                0F,
+                true,
+                "lilac",
+                0
+            )
+        )
+        songDB.songDao().insert(
+            Song(
+                0,
+                "별거 없던 그 하루로",
+                "임창정",
+                R.drawable.album_sample_02,
+                false,
+                5,
+                0,
+                0F,
+                true,
+                "lilac",
+                0
+            )
+        )
+        songDB.songDao().insert(
+            Song(0, "잘 가라니", "2am", R.drawable.album_sample_06, false, 5, 0, 0F, true, "lilac", 0)
+        )
+
     }
 }
