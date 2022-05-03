@@ -1,17 +1,22 @@
 package com.umc.clone_flo
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Entity(tableName = "SongTable")
 data class Song(
-    val musicNumber: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val title: String = "",
     val singer: String = "",
-    val resId: Int? = null,
+    val coverImg: Int? = null,
     val isTitle: Boolean =false,
-    val playTime: Int = 0,
+    var playTime: Int = 0,
     var second: Int = 0,
     var mills: Float = 0F,
     var isPlaying: Boolean = false,
     var music: String = "",
-    var pausePosition: Int = 0
+    var pausePosition: Int = 0,
+    var isLike: Boolean = false
 ): Serializable

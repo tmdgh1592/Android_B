@@ -1,7 +1,6 @@
 package com.umc.clone_flo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,7 +88,7 @@ class AlbumFragment : Fragment(), View.OnClickListener {
     private fun setInit(album: Song?) {
         with(binding) {
             with(album!!) {
-                Glide.with(requireContext()).load(resId).into(albumAlbumIv)
+                Glide.with(requireContext()).load(coverImg).into(albumAlbumIv)
                 albumMusicTitleTv.text = title
                 albumSingerNameTv.text = singer
             }
