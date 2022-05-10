@@ -23,12 +23,14 @@
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_detail.xml" value="0.33" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_locker.xml" value="0.18" />
+        <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_locker_savedalbum.xml" value="0.180859375" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_music_file.xml" value="0.3651041666666667" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_pannel.xml" value="0.3651041666666667" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_saved_music.xml" value="0.33" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_song.xml" value="0.33" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/fragment_video.xml" value="0.25" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/item_album.xml" value="0.24583333333333332" />
+        <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/item_locker_album.xml" value="0.180859375" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/item_music.xml" value="0.33" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/item_saved_music.xml" value="0.25" />
         <entry key="..\:/android_practice/clone_flo/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.25" />

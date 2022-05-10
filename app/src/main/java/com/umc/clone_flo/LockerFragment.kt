@@ -18,6 +18,7 @@ class LockerFragment : Fragment() {
 
     lateinit var binding: FragmentLockerBinding
     private val information = arrayListOf<String>("저장한 곡", "음악파일")
+    private lateinit var songDB: SongDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +26,7 @@ class LockerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLockerBinding.inflate(inflater, container, false)
+        songDB = SongDatabase.getInstance(requireContext())!!
         return binding.root
     }
 
@@ -37,6 +39,7 @@ class LockerFragment : Fragment() {
             TabLayoutMediator(lockerTb, lockerContentVp) { tab, position ->
                 tab.text = information[position]
             }.attach()
+
 
         }
     }
@@ -55,11 +58,13 @@ class LockerFragment : Fragment() {
         val jwt : Int = getJwt()
         if (jwt == -1) {
             binding.lockerLoginTv.text = "로그인"
+            binding.lockerNameTv.text = ""
             binding.lockerLoginTv.setOnClickListener {
                 startActivity(Intent(requireActivity(), LoginActivity::class.java))
             }
         } else {
             binding.lockerLoginTv.text = "로그아웃"
+            binding.lockerNameTv.text = requireActivity().getSharedPreferences("auth", MODE_PRIVATE).getString("name", "")
             binding.lockerLoginTv.setOnClickListener {
                 startActivity(Intent(requireActivity(), MainActivity::class.java))
                 logout()

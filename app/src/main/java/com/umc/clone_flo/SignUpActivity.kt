@@ -24,11 +24,16 @@ class SignUpActivity : AppCompatActivity() {
         val email: String =
             binding.signUpIdEt.text.toString() + "@" + binding.signUpDirectInputEt.text.toString()
         val pwd: String = binding.signUpPasswordEt.text.toString()
-
-        return User(email, pwd)
+        val name = binding.signUpNameEt.text.toString()
+        return User(email, pwd, name)
     }
 
     private fun signUp() {
+        if (binding.signUpNameEt.text.toString().isEmpty()) {
+            Toast.makeText(this, "닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         if (binding.signUpIdEt.text.toString()
                 .isEmpty() || binding.signUpDirectInputEt.text.toString().isEmpty()
         ) {
