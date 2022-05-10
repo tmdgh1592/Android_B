@@ -31,8 +31,10 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
         binding = ActivityMainBinding.inflate(layoutInflater)
         setStatusBarTransparent(this, binding.rootView)
         setContentView(binding.root)
-        inputDummySongs()
 
+        // 더미데이터 삽입
+        inputDummySongs()
+        inputDummyAlbums()
 
         setActivityLauncher()
         initSong() // 음악 데이터 초기화
@@ -291,6 +293,50 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
         )
         songDB.songDao().insert(
             Song(0, "잘 가라니", "2am", R.drawable.album_sample_06, false, 5, 0, 0F, true, "lilac", 0)
+        )
+
+    }
+
+
+    private fun inputDummyAlbums() {
+        val songDB = SongDatabase.getInstance(this)!!
+        val albums = songDB.albumDao().getAlbums()
+
+        if (albums.isNotEmpty()) return
+
+        songDB.albumDao().insert(
+            Album(
+                0,
+                "IU 5th Album 'LILAC'", "아이유 (IU)", R.drawable.img_album_exp2
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                1,
+                "Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                2,
+                "iScreaM Vol.10 : Next Level Remixes", "에스파 (AESPA)", R.drawable.img_album_exp3
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                3,
+                "MAP OF THE SOUL : PERSONA", "방탄소년단 (BTS)", R.drawable.img_album_exp4
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                4,
+                "GREAT!", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5
+            )
         )
 
     }

@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="40dp">
+    android:layout_marginTop="40dp"
+    android:layout_marginRight="16dp">
 
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="보관함"
         android:layout_marginLeft="16dp"
+        android:text="보관함"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/locker_login_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -34,31 +35,31 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/locker_tb"
-        android:background="@color/tabLayoutDividerColor"/>
+        android:background="@color/tabLayoutDividerColor"
+        app:layout_constraintBottom_toBottomOf="@+id/locker_tb" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/locker_tb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tabMode="auto"
         android:layout_marginStart="8dp"
-        app:tabBackground="@drawable/bg_tab_indicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_tv"
+        app:tabBackground="@drawable/bg_tab_indicator"
         app:tabIndicatorColor="#3f3fff"
         app:tabIndicatorFullWidth="false"
-        app:tabTextAppearance="@style/tabTextTheme"
+        app:tabMode="auto"
         app:tabRippleColor="#00ff0000"
-        app:tabTextColor="#1C1C1C"
-        app:tabSelectedTextColor="#3f3fff"/>
+        app:tabSelectedTextColor="#3f3fff"
+        app:tabTextAppearance="@style/tabTextTheme"
+        app:tabTextColor="#1C1C1C" />
 
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/locker_content_vp"
         android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
         android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

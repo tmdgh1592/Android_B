@@ -23,6 +23,7 @@ class HomeFragment : Fragment(), CoroutineScope {
     val job = Job()
 
     lateinit var binding: FragmentHomeBinding
+    private var albumData = ArrayList<Album>()
 
     // 오늘 발매 음악 리사이클러뷰 어댑터
     private var todayAlbums = ArrayList<Song>()
@@ -36,6 +37,8 @@ class HomeFragment : Fragment(), CoroutineScope {
         AlbumRvAdapter(dailyAlbums)
     }
 
+    private lateinit var songDB: SongDatabase
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +46,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        songDB = SongDatabase.getInstance(requireContext())!!
         return binding.root
     }
 
@@ -112,16 +116,38 @@ class HomeFragment : Fragment(), CoroutineScope {
                 }
             })
 
+            albumData.addAll(songDB.albumDao().getAlbums())
+
             homeTodayMusicAlbumRv.adapter = todayAlbumAdapter
             homeTodayMusicAlbumRv.addItemDecoration(AlbumAdapterDecoration())
-            todayAlbumAdapter.updateList(todayAlbums)
+            todayAlbumAdapter.updateList(translateData(albumData))
 
 
             homeDailyMusicRv.adapter = potcastAdapter
             homeDailyMusicRv.addItemDecoration(AlbumAdapterDecoration())
-            potcastAdapter.updateList(dailyAlbums)
+            potcastAdapter.updateList(translateData(albumData))
 
         }
+    }
+
+    private fun translateData(albumData: ArrayList<Album>): ArrayList<Song> {
+        val songList = ArrayList<Song>()
+        albumData.forEach { album ->
+            songList.add(
+                Song(
+                    album.id, album.title!!, album.singer!!, album.coverImg,
+                    false,
+                    279,
+                    0,
+                    0F,
+                    true,
+                    "lilac",
+                    0
+                )
+            )
+        }
+
+        return songList
     }
 
     private fun changeAlbumFragment(album: Song) {
@@ -137,7 +163,21 @@ class HomeFragment : Fragment(), CoroutineScope {
 
     private fun putDumpData() {
         todayAlbums = ArrayList<Song>().apply {
-            add(Song(0, "LILAC", "아이유 (IU)", R.drawable.img_album_exp2, false, 279, 0, 0F, true, "lilac", 0))
+            add(
+                Song(
+                    0,
+                    "LILAC",
+                    "아이유 (IU)",
+                    R.drawable.img_album_exp2,
+                    false,
+                    279,
+                    0,
+                    0F,
+                    true,
+                    "lilac",
+                    0
+                )
+            )
             add(Song(0, "결론적으로", "SPARKY", R.drawable.album_sample_01))
             add(Song(0, "별거 없던 그 하루로", "임창정", R.drawable.album_sample_02))
             add(Song(0, "잘 가라니", "2am", R.drawable.album_sample_06))
