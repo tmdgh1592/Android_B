@@ -48,7 +48,8 @@ class LoginActivity : AppCompatActivity() {
 
         user?.let {
             Log.d("LOGIN_ACT/GET_USER", "userId: ${user.id}, $user")
-            saveJwt(user.id)
+            saveJwt(it.id)
+            saveName(it.name)
             startMainActivity()
         } ?: Toast.makeText(this, "회원 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
     }
@@ -63,6 +64,14 @@ class LoginActivity : AppCompatActivity() {
         val editor = spf.edit()
 
         editor.putInt("jwt", jwt)
+        editor.apply()
+    }
+
+    private fun saveName(userName: String) {
+        val spf = getSharedPreferences("auth", MODE_PRIVATE)
+        val editor = spf.edit()
+
+        editor.putString("name", userName)
         editor.apply()
     }
 
