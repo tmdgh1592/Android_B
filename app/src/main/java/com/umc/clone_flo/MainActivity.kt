@@ -3,6 +3,7 @@ package com.umc.clone_flo
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -41,9 +42,15 @@ class MainActivity(override val coroutineContext: CoroutineContext = Job() + Dis
         initBottomNavigation() // 바텀 네비게이션 초기화
         setClickListener() // 클릭 리스너
         startMusic() // 음악 시작
+        Log.d("TAG", "onCreate: ${getJwt2()}")
 
 //            Log.d("Song", song?.title + song?.singer) // logcat에 이 태그를 출력하는데 나중에 이걸로 검색할 수 있다.
 
+    }
+
+    private fun getJwt2(): String {
+        val spf = getSharedPreferences("auth2", MODE_PRIVATE)
+        return spf.getString("jwt", "")!!
     }
 
     private fun setActivityLauncher() {

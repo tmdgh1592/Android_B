@@ -29,4 +29,6 @@
     <color name="titleTextColor">#171717</color>
     <color name="detailTextColor">#6F6F6F</color>
     <color name="tabLayoutDividerColor">#FAFAFA</color>
+
+    <color name="form_error">#F11818</color>
 </resources>
