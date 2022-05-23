@@ -15,10 +15,10 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".SongActivity"
+            android:name=".view.SongActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -28,10 +28,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".view.SignUpActivity"
             android:exported="false" />
     </application>
 

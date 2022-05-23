@@ -1,6 +1,7 @@
 package com.umc.clone_flo
 
 import android.app.Application
+import com.umc.clone_flo.view.SongActivity
 
 class MyApplication : Application() {
 
